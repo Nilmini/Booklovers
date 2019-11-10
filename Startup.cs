@@ -26,11 +26,15 @@ namespace Booklovers
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<BookloverBookContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("BookloverBookContext")));
 
-            services.AddDbContext<BookloverBookContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("BookloverBookContext")));
+            if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+                services.AddDbContext<BookloverBookContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
+            else
+                services.AddDbContext<BookloverBookContext>(options =>
+                    options.UseSqlite(Configuration.GetConnectionString("BookloverBookContext")));
+
+            services.BuildServiceProvider().GetService<BookloverBookContext>().Database.Migrate();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
