@@ -1,0 +1,39 @@
+@model Booklovers.Models.Author
+
+@{
+    ViewData["Title"] = "Create Author";
+    ViewData["isEdit"] = false;
+}
+
+<section class="hero-wrap hero-wrap-2 hero-wrap-lite ftco-degree-bg js-fullheight" style="background-color: #eee;"
+    data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate pb-5 text-center">
+                <form action="#" class="search-location mt-md-5">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 align-items-end">
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <h1 class="mb-3 bread">Add Author</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+    <div class ="col-md-2"></div>
+    <div class="col-md-8">
+        <partial name="~/Views/Authors/_AuthorForm.cshtml" for="@Model" view-data="ViewData">
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

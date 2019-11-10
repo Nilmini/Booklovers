@@ -1,0 +1,39 @@
+@model Booklovers.Models.Author
+
+@{
+    var action = "Create";
+    if ((bool) ViewData["isEdit"] == true) {
+        action = "Edit";
+    }
+}
+
+<div class="row block-9 justify-content-center mb-5">
+    <div class="col-md-12 mb-md-12">
+    <form asp-action="@action" asp-controller="Authors" class="p-5 contact-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if ((bool) ViewData["isEdit"] == true) {
+            <input type="hidden" asp-for="Id" />
+        }
+            <div class="form-group">
+                <input placeholder="Name" asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input placeholder="ImageUrl" asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Bio" asp-for="Bio" class="form-control"></textarea>
+                <span asp-validation-for="Bio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @if ((bool)ViewData["isEdit"] == false) {
+                    <input type="submit" value="Add Author" class="btn btn-primary py-3 px-5" />
+                } else {
+                    <input type="submit" value="Edit Author" class="btn btn-primary py-3 px-5" />
+                }
+            </div>
+    </form>
+    
+    </div>
+</div>

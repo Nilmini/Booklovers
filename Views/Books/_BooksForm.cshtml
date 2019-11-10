@@ -1,0 +1,93 @@
+@model Booklovers.Models.Book
+
+@{
+    var action = "Create";
+    if ((bool) ViewData["isEdit"] == true) {
+        action = "Edit";
+    }
+}
+
+<section class="hero-wrap hero-wrap-2 hero-wrap-lite ftco-degree-bg js-fullheight" style="background-color: #eee;"
+    data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate pb-5 text-center">
+                <form action="#" class="search-location mt-md-5">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 align-items-end">
+                            <div class="form-group">
+                                <div class="form-field">
+                                    @if ((bool)ViewData["isEdit"] == false) {
+                                        <h1 class="mb-3 bread">Add Book</h1>
+                                    } else {
+                                        <h1 class="mb-3 bread">Edit Book</h1>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row block-9 justify-content-center mb-5">
+    <div class="col-md-8 mb-md-5">
+    <form asp-action="@action" asp-controller="Books" class="p-5 contact-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if ((bool) ViewData["isEdit"] == true) {
+            <input type="hidden" asp-for="Id" />
+        }
+            <div class="form-group">
+                <input placeholder="Title" asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group field-author">
+                @Html.DropDownListFor(model => model.AuthorId, ViewBag.Authors as SelectList, "- Select author -",  new { @class = "form-control"} ) 
+                <a class="btn" data-toggle="modal" data-target="#exampleModal">Add new author</a>
+                @Html.ValidationMessageFor(model => model.AuthorId, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <input placeholder="Thumbnail URL" asp-for="Thumbnail" class="form-control" />
+                <span asp-validation-for="Thumbnail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input placeholder="Price" asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            @if ((bool)ViewData["isEdit"] == true) {
+            <div class="form-group">
+                <input placeholder="Rating" asp-for="Rating" class="form-control" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+            }
+            <div class="form-group">
+                @if ((bool)ViewData["isEdit"] == false) {
+                    <input type="submit" value="Add Book" class="btn btn-primary py-3 px-5" />
+                } else {
+                    <input type="submit" value="Edit Book" class="btn btn-primary py-3 px-5" />
+                }
+            </div>
+    </form>
+    
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Author</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <partial name="~/Views/Authors/_AuthorForm.cshtml" for="@Model.Author">
+      </div>
+    </div>
+  </div>
+</div>
+

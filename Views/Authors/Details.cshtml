@@ -1,0 +1,63 @@
+@model Booklovers.Models.Author
+
+@{
+    ViewData["Title"] = "Author Details";
+}
+
+<section class="hero-wrap hero-wrap-2 hero-wrap-empty ftco-degree-bg js-fullheight" style="background-color: #eee;"
+    data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate pb-5 text-center">
+                <form action="#" class="search-location mt-md-5">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 align-items-end">
+                            <div class="form-group">
+                                <div class="form-field">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-property-details">
+    <div class="container">
+        <div class="row pills">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-3">
+                <div class="img">
+                    <img src="@Model.ImageUrl" alt="@Model.Name" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="book-details">
+                    <h2 class="detail-title">@Model.Name</h2>
+                    <p>@Model.Bio</p>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit Author</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (Model.Books != null && Model.Books.Count > 0) {
+<section class="ftco-section">
+    <div class="container">
+    <div class="row">
+        @foreach (var item in Model.Books) {
+            @await Html.PartialAsync("~/Views/Books/_BookCart.cshtml", item);
+        }
+        
+    </div>
+
+    </div>
+</section>
+}

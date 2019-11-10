@@ -1,0 +1,20 @@
+@model Booklovers.Models.Book
+
+<div class="col-md-4">
+    <div class="property-wrap ftco-animate">
+        @if (Model.Thumbnail == null || Model.Thumbnail == "") {
+            <a asp-action="Details" asp-route-id="@Model.Id" asp-controller="Books" class="img" style="background-image: url('https://www.mbrsg.ae/MBRSG/media/Images/no-image-icon-6.png');"></a>
+        } else {
+            <a asp-action="Details" asp-route-id="@Model.Id" asp-controller="Books" class="img" style="background-image: url(@Model.Thumbnail);"></a>
+        }
+        
+        <div class="text card-border">
+            <p class="price"><small>USD </small>@Model.Price.ToString("0.00")</p>
+            <h3><a asp-action="Details" asp-route-id="@Model.Id" asp-controller="Books">@Model.Title</a></h3>
+            <span class="location"><a class="asp-link" asp-action="Details" asp-route-id="@Model.AuthorId" asp-controller="Authors">@Model.Author.Name</a></span>
+            <a asp-action="Edit" asp-route-id="@Model.Id" asp-controller="Books" class="d-flex align-items-center justify-content-center btn-custom">
+                <span class="ion-ios-create"></span>
+            </a>
+        </div>
+    </div>
+</div>

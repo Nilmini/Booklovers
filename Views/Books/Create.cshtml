@@ -1,0 +1,12 @@
+@model Booklovers.Models.Book
+
+@{
+    ViewData["Title"] = "Book Create";
+    ViewData["isEdit"] = false;
+}
+
+<partial name="~/Views/Books/_BooksForm.cshtml" for="@Model" view-data="ViewData">
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

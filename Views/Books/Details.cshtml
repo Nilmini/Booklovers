@@ -1,0 +1,63 @@
+@model Booklovers.Models.Book
+
+@{
+    ViewData["Title"] = "Book Details";
+}
+<section class="hero-wrap hero-wrap-2 hero-wrap-empty ftco-degree-bg js-fullheight" style="background-color: #eee;"
+    data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate pb-5 text-center">
+                <form action="#" class="search-location mt-md-5">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 align-items-end">
+                            <div class="form-group">
+                                <div class="form-field">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-property-details">
+    <div class="container">
+        <div class="row pills">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-3">
+                <div class="img">
+                    <img src="@Model.Thumbnail" alt="@Model.Title" />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="book-details">
+                    <h2 class="detail-title">@Model.Title</h2>
+                    <span class="subheading">By <a asp-action="Details" asp-controller="Authors" asp-route-id="@Model.AuthorId" class="asp-link">@Model.Author.Name</a></span>
+                    <div class="rating-wrap">
+                        <p class="star">
+                            <span>
+                                <i class="ion-ios-star"></i>
+                                <i class="ion-ios-star"></i>
+                                <i class="ion-ios-star"></i>
+                                <i class="ion-ios-star"></i>
+                                <i class="ion-ios-star"></i>
+                                (@Model.Rating)
+                            </span>
+                        </p>
+                    </div>
+                    <br/>
+                    <h4><small>USD</small> @Model.Price.ToString("0.00") &nbsp<a href="" class="buy-now">Buy Now</a></h4>
+                    <br/>   
+                    <a asp-action="Edit" asp-controller="Books" asp-route-id="@Model.Id" class="btn btn-primary">Edit Book</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

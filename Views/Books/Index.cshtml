@@ -1,0 +1,52 @@
+@model IEnumerable<Booklovers.Models.Book>
+
+@{
+    ViewData["Title"] = "Books";
+    var noOfPages = (int)ViewData["Pages"];
+    var currentPage = (int)ViewData["CurrentPage"];
+}
+
+<section class="hero-wrap hero-wrap-2 ftco-degree-bg js-fullheight" style="background-color: #eee;" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate pb-5 text-center">
+            <partial name="~/Views/Shared/_SearchBox.cshtml" view-data="ViewData"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+<section class="ftco-section">
+    	<div class="container">
+        <div class="row">
+            @foreach (var item in Model) {
+        	    @await Html.PartialAsync("~/Views/Books/_BookCart.cshtml", item);
+            }
+        	
+        </div>
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+                @if (currentPage != 1) {
+                    <li><a asp-route-page="@(currentPage - 1)">&lt;</a></li>
+                }
+                @for (var i = 1; i <= noOfPages; i++) {
+                    @if ((int)ViewData["CurrentPage"] == i) 
+                    {
+                        <li class='active'><span><a asp-route-page="@i">@i</a></span></li>
+                    } else {
+                        <li class=''><span><a asp-route-page="@i">@i</a></span></li>
+                    }
+                }
+                @if (currentPage != noOfPages) {
+                    <li><a asp-route-page="@(currentPage + 1)">&gt;</a></li>
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+    	</div>
+    </section>

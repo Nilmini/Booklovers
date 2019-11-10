@@ -1,0 +1,12 @@
+<form asp-controller="Books" asp-action="Index" method="get" class="search-location mt-md-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 align-items-end">
+            <div class="form-group">
+            <div class="form-field">
+            <input value='@ViewData["Query"]' type="text" name="title" class="form-control" placeholder="Search book title">
+            <button><span class="ion-ios-search"></span></button>
+            </div>
+        </div>
+        </div>
+    </div>
+</form>
